@@ -1,22 +1,22 @@
--- создание обьектного типа, который будет содержать таблица очереди
+-- СЃРѕР·РґР°РЅРёРµ РѕР±СЊРµРєС‚РЅРѕРіРѕ С‚РёРїР°, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ С‚Р°Р±Р»РёС†Р° РѕС‡РµСЂРµРґРё
 create or replace type xml_to_clob as object(put_in clob);
--- создание таблицы очереди
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РѕС‡РµСЂРµРґРё
 begin
     dbms_aqadm.create_queue_table('CL_ACT','xml_to_clob',multiple_consumers => true);
 end;
--- проверка что таблицы очереди создана
+-- РїСЂРѕРІРµСЂРєР° С‡С‚Рѕ С‚Р°Р±Р»РёС†С‹ РѕС‡РµСЂРµРґРё СЃРѕР·РґР°РЅР°
 select * from user_queue_tables;
--- сама таблица
+-- СЃР°РјР° С‚Р°Р±Р»РёС†Р°
 select * from CL_ACT
--- создаем очередь CLIENT_Q
+-- СЃРѕР·РґР°РµРј РѕС‡РµСЂРµРґСЊ CLIENT_Q
 begin
     dbms_aqadm.create_queue('CLIENT_Q','CL_ACT');
 end;
--- запуск очереди
+-- Р·Р°РїСѓСЃРє РѕС‡РµСЂРµРґРё
 begin
     dbms_aqadm.start_queue('CLIENT_Q');
 end;
--- остановка очереди
+-- РѕСЃС‚Р°РЅРѕРІРєР° РѕС‡РµСЂРµРґРё
 begin
     dbms_aqadm.stop_queue('CLIENT_Q');
 end;
