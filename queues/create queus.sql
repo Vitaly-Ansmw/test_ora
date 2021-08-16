@@ -40,15 +40,20 @@ end;
 select * from queues_proc;
 select * from queues_arr;
 
-
--- запуск очереди
+-- запуск процесса и очереди
 begin
-    dbms_aqadm.start_queue('CLIENT_Q');
+    queues_lib.start_queue_proc(458);
 end;
+
+-- Проверим статус процесса и очередей
+select *
+from table (queues_lib.status_queue_proc(458));
+
 -- остановка очереди
 begin
-    dbms_aqadm.stop_queue('CLIENT_Q');
+    queues_lib.stop_queue_proc(458);
 end;
 
-
-truncate table queues_arr
+begin
+    dbms_aqadm.stop_queue('Q_ADD_CLIENT_OUT');
+end;
