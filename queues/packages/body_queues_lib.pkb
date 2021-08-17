@@ -117,9 +117,6 @@ is
                 pipe row(result_status(idx1));
             end loop;
         end if;
-        
-        sssssssssssssssssssssss
-        
         return;
     end;
 
