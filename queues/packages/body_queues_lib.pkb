@@ -104,7 +104,7 @@ is
         from queues_proc a1
         ,queues_arr b1
         ,all_queues c1
-        where b1.collection_id = a1.c_queues_arr
+        where b1.collection_id = a1.c_queues_arrche
         and c1.qid = b1.c_id_query;
         
         if result_status.count = 0
@@ -117,6 +117,8 @@ is
                 pipe row(result_status(idx1));
             end loop;
         end if;
+        
+        ssssssssssssss
         
         return;
     end;
