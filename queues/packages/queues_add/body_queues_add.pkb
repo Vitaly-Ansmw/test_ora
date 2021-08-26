@@ -1,4 +1,4 @@
-CREATE OR REPLACE package body SYS.queues_add
+п»їCREATE OR REPLACE package body SYS.queues_add
 is
     function execute_add (p_id in number
                           ,p_code in varchar2
@@ -26,11 +26,11 @@ is
             error_message := null;
             if v_value is null
             then
-                error_message := 'Отсутствует значение для проверки дубликата'||chr(10);
+                error_message := 'РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РїСЂРѕРІРµСЂРєРё РґСѓР±Р»РёРєР°С‚Р°'||chr(10);
                 raise queues_error;
             elsif v_par is null
             then
-                error_message := 'Отсутствует параметр для проверки дубликата'||chr(10);
+                error_message := 'РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РїР°СЂР°РјРµС‚СЂ РґР»СЏ РїСЂРѕРІРµСЂРєРё РґСѓР±Р»РёРєР°С‚Р°'||chr(10);
                 raise queues_error;
             end if;
             
@@ -48,13 +48,13 @@ is
                     return false;
                 elsif cnt = 1
                 then
-                    error_message := 'Найдена похожая запись с id '||founded_proc(1)||chr(10);
+                    error_message := 'РќР°Р№РґРµРЅР° РїРѕС…РѕР¶Р°СЏ Р·Р°РїРёСЃСЊ СЃ id '||founded_proc(1)||chr(10);
                     return true;
                 elsif cnt > 1
                 then
                     for idx in founded_proc.first..founded_proc.last
                     loop
-                        error_message := error_message||' Найдена похожая запись с кодом '||founded_proc(idx)||chr(10);
+                        error_message := error_message||' РќР°Р№РґРµРЅР° РїРѕС…РѕР¶Р°СЏ Р·Р°РїРёСЃСЊ СЃ РєРѕРґРѕРј '||founded_proc(idx)||chr(10);
                     end loop;
                     return true;
                 end if;
@@ -73,13 +73,13 @@ is
                     return false;
                 elsif cnt = 1
                 then
-                    error_message := 'Найдена похожая запись с кодом '||founded_proc(1)||chr(10);
+                    error_message := 'РќР°Р№РґРµРЅР° РїРѕС…РѕР¶Р°СЏ Р·Р°РїРёСЃСЊ СЃ РєРѕРґРѕРј '||founded_proc(1)||chr(10);
                     return true;
                 elsif cnt > 1
                 then
                     for idx in founded_proc.first..founded_proc.last
                     loop
-                        error_message := error_message||' Найдена похожая запись с кодом '||founded_proc(idx)||chr(10);
+                        error_message := error_message||' РќР°Р№РґРµРЅР° РїРѕС…РѕР¶Р°СЏ Р·Р°РїРёСЃСЊ СЃ РєРѕРґРѕРј '||founded_proc(idx)||chr(10);
                     end loop;
                     return true;
                 end if;
@@ -101,7 +101,7 @@ is
         
         if p_code is null
         then
-            error_message := 'Код очереди пустой'||chr(10);
+            error_message := 'РљРѕРґ РѕС‡РµСЂРµРґРё РїСѓСЃС‚РѕР№'||chr(10);
             raise queues_error;
         else
             if check_dubl(p_code,'CODE')
@@ -114,7 +114,7 @@ is
         
         if p_name is null
         then
-            error_message := 'Наименование не может быть пустым'||chr(10);
+            error_message := 'РќР°РёРјРµРЅРѕРІР°РЅРёРµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј'||chr(10);
             raise queues_error;
         else
             queues_proc_ref.c_name := p_name;
@@ -122,7 +122,7 @@ is
             
         if p_in_queue = p_out_queue
         then 
-            error_message := 'Очереди не могут быть идентичны друг другу'||chr(10);
+            error_message := 'РћС‡РµСЂРµРґРё РЅРµ РјРѕРіСѓС‚ Р±С‹С‚СЊ РёРґРµРЅС‚РёС‡РЅС‹ РґСЂСѓРі РґСЂСѓРіСѓ'||chr(10);
             raise queues_error;
         else
             v_in_queue := p_in_queue;
@@ -131,7 +131,7 @@ is
         
         if p_proc_type is null
         then
-            error_message := 'Отсутсвует значение процесса'||chr(10);
+            error_message := 'РћС‚СЃСѓС‚СЃРІСѓРµС‚ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕС†РµСЃСЃР°'||chr(10);
             raise queues_error;
         else
            queues_proc_ref.c_proc_type := p_proc_type;
@@ -166,6 +166,6 @@ is
     then
         dbms_output.put_line(error_message);
     end;
-            
+            --end
 end queues_add;
 /
